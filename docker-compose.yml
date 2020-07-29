@@ -1,0 +1,31 @@
+version: '3.3'
+
+services: 
+    front:
+      container_name: "front"
+      build: .
+      volumes: 
+        - .:/app
+      working_dir: "/app"
+      ports: 
+        - 8080:8080
+      command: ['npm', 'run', 'serve']
+      networks: [front]
+
+      # ESTRUTURA PARA VÁRIOS DOCKERFILE
+      # back:
+      #   container_name: "backend"
+      #   build: 
+      #     context: "./server"
+      #     dockerfile: "Dockerfile"
+      #   # volumes: 
+      #   #   - .:/server/app
+      #   working_dir: /server/app
+      #   ports: 
+      #       - 3000:3000
+      #   command: ['npm', 'run', 'serve']
+      #   networks: [backend]
+
+networks:
+  front:
+    driver: bridge
